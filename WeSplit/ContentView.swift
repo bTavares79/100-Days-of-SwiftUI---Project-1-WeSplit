@@ -14,6 +14,8 @@ struct ContentView: View {
     @State private var tipPercentage = 20
     @FocusState private var amountIsFocused: Bool
     
+    let locale = Locale.current.currency?.identifier ?? "USD"
+    
     let tippercentages = [10, 15, 20, 25, 0]
     
     // This is a computed property
@@ -43,7 +45,7 @@ struct ContentView: View {
         NavigationView{
             Form{
                 Section{
-                    TextField("Amount", value: $checkAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                    TextField("Amount", value: $checkAmount, format: .currency(code: locale))
                         .keyboardType(.decimalPad)
                         .focused($amountIsFocused) // When you tap this text field, this tag will go true
                     
@@ -62,6 +64,7 @@ struct ContentView: View {
 //                        }
 //                    }
 //                    .pickerStyle(.segmented)
+                    
                     Picker("Tip percentage", selection: $tipPercentage){
                         ForEach(0..<101){
                             Text("\($0)%")
@@ -73,14 +76,14 @@ struct ContentView: View {
                 
                 
                 Section {
-                    Text(totalCheckamount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                    Text(totalCheckamount, format: .currency(code: locale))
                 } header: {
                     Text("Total check amount with tip")
                 }
                 
                 
                 Section{
-                    Text(totalPerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                    Text(totalPerPerson, format: .currency(code: locale))
                 } header: {
                     Text("Amount per person")
                 }
