@@ -17,6 +17,7 @@ struct ContentView: View {
     let locale = Locale.current.currency?.identifier ?? "USD"
     
     let tippercentages = [10, 15, 20, 25, 0]
+
     
     // This is a computed property
     var totalPerPerson: Double {
@@ -77,6 +78,7 @@ struct ContentView: View {
                 
                 Section {
                     Text(totalCheckamount, format: .currency(code: locale))
+                        .foregroundColor(tipPercentage == 0 ? .red : .black)
                 } header: {
                     Text("Total check amount with tip")
                 }
